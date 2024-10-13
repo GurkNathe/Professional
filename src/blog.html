@@ -5,8 +5,7 @@
     <link rel="icon" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="My personal website where I upload what I am doing, 
-        and what I want to talk about." />
+    <meta name="description" content="My professional website where I upload content about things related to my career." />
     <title>Blog</title>
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -73,8 +72,8 @@
     <!-- TODO: pages -->
     <!-- TODO: loader -->
     <div id="posts" class="posts">
+        <noscript>No articles could be loaded because JavaScript is disabled.</noscript>
     </div>
-    <noscript>No articles could be loaded because JavaScript is disabled.</noscript>
     <script>
         function route(page) {
             window.location.href = page;
@@ -102,10 +101,10 @@
             };
         }
 
-        document.getElementById("search").addEventListener("keyup", (event) => {
+        document.getElementById("search").addEventListener("keydown", (event) => {
             const text = event.target.value;
             const result = search(text);
-            console.log(result)
+            
             result.all.forEach((article) => {
                 document.getElementById(`post-${article.contentUrl}`).removeAttribute("hidden");
             });
@@ -121,9 +120,14 @@
         // TODO: Progressive loading of articles as a user scrolls down the page
         // Gets a JSON object to help generate article cards
         async function getArticles() {
-            const res = await fetch("https://raw.githubusercontent.com/GurkNathe/Personal/main/articles/articles.json");
-            const articles = await res.json();
-            sessionStorage.setItem("articles", JSON.stringify(articles));
+            let articles = JSON.parse(sessionStorage.getItem("articles"));
+
+            if (articles === null) {
+                const res = await fetch("https://raw.githubusercontent.com/GurkNathe/Professional/main/articles/articles.json");
+                articles = await res.json();
+                sessionStorage.setItem("articles", JSON.stringify(articles));
+            }
+
             const posts = document.getElementById("posts");
 
             for (const article of articles) {
