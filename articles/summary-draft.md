@@ -1,1 +1,0 @@
-This is a recipe for the breakfast that I eat every day. It is a greek yogurt, berry, and oat mixture. It is healthy and a great way to start your morning.
