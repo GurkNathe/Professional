@@ -89,7 +89,7 @@
 
         async function fetchArticleContent(articleUrl, articleTitle) {
             try {
-                const res = await fetch(`https://raw.githubusercontent.com/GurkNathe/Personal/main/articles/articles/${articleUrl}.html`);
+                const res = await fetch(`https://raw.githubusercontent.com/GurkNathe/Professional/main/articles/articles/${articleUrl}.html`);
                 if (res.ok) {
                     const htmlContent = await res.text();
                     document.getElementById("article-container").innerHTML = htmlContent;
