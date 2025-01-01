@@ -101,7 +101,7 @@
             };
         }
 
-        document.getElementById("search").addEventListener("keydown", (event) => {
+        document.getElementById("search").addEventListener("keyup", (event) => {
             const text = event.target.value;
             const result = search(text);
             
